@@ -1,0 +1,16 @@
+{
+  "name": "dribbble-bb",
+  "version": "0.0.1",
+  "scripts": {
+      "start":"webworks serve"
+  },
+  "description": "BlackBerry dribbble applications",
+  "author": {
+    "name": "Charles Bao",
+    "email": "hi@charlesbao.com"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/charlesbao/dribbble-bb.git"
+  }
+}
