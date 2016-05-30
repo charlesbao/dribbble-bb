@@ -1,14 +1,45 @@
 <style>
+    #grid {
+        margin-top: 90px;
+    }
     #grid div[data-bb-type="item"]{
         margin-top: -10px;
     }
+
+    #pill {
+        position: fixed;
+        margin-top: 110px;
+        z-index: 99;
+        width: 100%;
+        background: black;
+        top: -10px;
+        left: -10px;
+    }
+
+    .bb-title-bar img {
+        width: auto;
+        height: 70px;
+        margin-top: 18px;
+        display: inline;
+        float: none;
+    }
 </style>
-<div data-bb-type="screen" data-bb-scroll-effect="off">
-    <div id="grid" data-bb-type="grid-layout" data-bb-style="auto">
+<div id="dribbbleScreen" style="background: #333;" data-bb-type="screen" data-bb-scroll-effect="off"
+     data-bb-effect="fade" onscroll="scroll()">
+    <div data-bb-type="title" data-bb-caption="<img src='img/logo-title.png'/>"></div>
+    <div id="pill" data-bb-type="pill-buttons">
+        <div data-bb-type="pill-button" data-bb-selected="true">Popular</div>
+        <div data-bb-type="pill-button">Recent</div>
+        <div data-bb-type="pill-button">Lastest</div>
     </div>
-    <div data-bb-type="action-bar">
-        <div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png">Do Something</div>
-        <div data-bb-type="action" data-bb-style="button" data-bb-signature="true" data-bb-img="img/logo.png">My Caption</div>
-        <div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png">My Caption</div>
+    <div id="grid" data-bb-type="grid-layout" data-bb-style="auto"></div>
+    <div id="actionBar" data-bb-type="action-bar">
+        <div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png" onclick="getDribbble(-1)">上一页</div>
+        <div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png" onclick="getDribbble(1)">下一页</div>
     </div>
 </div>
+<script>
+    function scroll() {
+        console.log(bb.screen.currentScreen)
+    }
+</script>
