@@ -6,6 +6,8 @@ var app = {
     },
     bindEvents: function() {
         document.addEventListener('deviceready', this.onDeviceReady, false);
+        document.addEventListener('swipeUp', swipeUp);
+        document.addEventListener('swipeDown',swipeDown);
     },
     onDeviceReady: function() {
         app.receivedEvent('deviceready');
@@ -30,8 +32,22 @@ var app = {
     }
 };
 
+function swipeUp(){
+    if(document.getElementById('fixHeader'))
+        document.getElementById('fixHeader').className = 'hide'
+}
+
+function swipeDown(){
+    if(document.getElementById('fixHeader'))
+        document.getElementById('fixHeader').className = ''
+}
+
 function getDribbble(method) {
     page += method;
+
+    if(method < 0){
+        return bb.popScreen();
+    }
     if (cache[page]) {
         preDribble(page + 1)
         return bb.pushScreen('components/dribbbleScreen.html', 'page', {data: cache[page]});
@@ -67,10 +83,14 @@ function setDribbble(element,params){
     var html = [];
     for(each in data){
         if(each%2){
-            html.push('<div data-bb-type="row">');
-            html.push('<div onclick="showBig(\'' + data[each - 1]['image']['big'] + '\')" data-bb-type="item" data-bb-img="' + data[each - 1]['image']['normal'] + '"></div>');
-            html.push('<div onclick="showBig(\'' + data[each]['image']['big'] + '\')" data-bb-type="item" data-bb-img="' + data[each]['image']['normal'] + '"></div>');
-            html.push('</div>');
+            //html.push('<div data-bb-type="row">');
+            //html.push('<div onclick="showBig(\'' + data[each - 1]['image']['big'] + '\')" data-bb-type="item" data-bb-img="' + data[each - 1]['image']['normal'] + '"></div>');
+            //html.push('<div onclick="showBig(\'' + data[each]['image']['big'] + '\')" data-bb-type="item" data-bb-img="' + data[each]['image']['normal'] + '"></div>');
+            //html.push('</div>');
+            html.push('<div class="row">');
+            html.push('<img onclick="showBig(\'' + data[each - 1]['image']['big'] + '\')" src="' + data[each - 1]['image']['normal'] + '"/>')
+            html.push('<img onclick="showBig(\'' + data[each]['image']['big'] + '\')" src="' + data[each]['image']['normal'] + '"/>')
+            html.push('</div>')
         }
     }
     element.getElementById('grid').innerHTML = html.join('')
@@ -79,7 +99,7 @@ function setDribbble(element,params){
 function setDetail(element, params) {
     var data = params.data;
     var html = '<img src="' + data + '" />';
-    var height = bb.screen.currentScreen.clientHeight - bb.screen.getActionBarHeight()
+    var height = bb.innerHeight() - bb.screen.getActionBarHeight()
     element.getElementById('detail').style.height = height + 'px';
     element.getElementById('detail').innerHTML = html;
 }

@@ -7,8 +7,8 @@
     }
 
     #pill {
-        position: fixed;
-        margin-top: 110px;
+        position:relative;
+        /*margin-top: 110px;*/
         z-index: 99;
         width: 100%;
         background: black;
@@ -16,30 +16,53 @@
         left: -10px;
     }
 
-    .bb-title-bar img {
+    .title img {
         width: auto;
         height: 70px;
         margin-top: 18px;
         display: inline;
         float: none;
     }
+    .row img{
+        width: calc(50% - 6px);
+        padding: 0px 3px;
+    }
+    #fixHeader{
+        position: fixed;
+        top: 0px;
+        width: 100%;
+        transition: all .5s;
+    }
+    #fixHeader.hide{
+        transform: translateY(-200px);
+    }
+    .title{
+        width: 100%;
+        height: 100px;
+        background: black;
+        text-align: center;
+    }
 </style>
-<div id="dribbbleScreen" style="background: #333;" data-bb-type="screen" data-bb-scroll-effect="off"
-     data-bb-effect="fade" onscroll="scroll()">
-    <div data-bb-type="title" data-bb-caption="<img src='img/logo-title.png'/>"></div>
-    <div id="pill" data-bb-type="pill-buttons">
-        <div data-bb-type="pill-button" data-bb-selected="true">Popular</div>
-        <div data-bb-type="pill-button">Recent</div>
-        <div data-bb-type="pill-button">Lastest</div>
+<div id="dribbbleScreen" style="background: #333;" data-bb-type="screen" data-bb-effect="fade" onscroll="scrollHandle()">
+    <div id="fixHeader">
+        <div class="title">
+            <img src='img/logo-title.png'/>
+        </div>
+        <div id="pill" data-bb-type="pill-buttons">
+            <div data-bb-type="pill-button" data-bb-selected="true">Popular</div>
+            <div data-bb-type="pill-button">Recent</div>
+            <div data-bb-type="pill-button">Lastest</div>
+        </div>
     </div>
+
     <div id="grid" data-bb-type="grid-layout" data-bb-style="auto"></div>
-    <div id="actionBar" data-bb-type="action-bar">
-        <div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png" onclick="getDribbble(-1)">上一页</div>
-        <div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png" onclick="getDribbble(1)">下一页</div>
-    </div>
+    <!--<div id="actionBar" data-bb-type="action-bar">-->
+        <!--<div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png" onclick="getDribbble(-1)">上一页</div>-->
+        <!--<div data-bb-type="action" data-bb-style="button" data-bb-img="img/logo.png" onclick="getDribbble(1)">下一页</div>-->
+    <!--</div>-->
 </div>
 <script>
-    function scroll() {
-        console.log(bb.screen.currentScreen)
+    function scrollHandle() {
+//        console.log(bb.screen.currentScreen)
     }
 </script>
